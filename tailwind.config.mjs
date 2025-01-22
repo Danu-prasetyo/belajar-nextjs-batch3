@@ -8,8 +8,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        aigenRed: "#b50a0f",
+        aigenBlack3: "#f8f8f8",
       },
     },
   },

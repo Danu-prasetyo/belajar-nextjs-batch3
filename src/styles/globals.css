@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .bg-gradient-aigen {
+    @apply bg-gradient-to-r from-violet-500 via-blue-500 to-sky-500;
+  }
+
+  .bg-gradient-hover {
+    @apply bg-gradient-to-r from-violet-500 via-blue-500 to-sky-500 hover:from-sky-500 hover:via-blue-500 hover:to-violet-500;
+  }
+}
