@@ -1,7 +1,7 @@
 import Button from "@/components/atoms/Button";
 import CardProduct from "@/components/molecules/CardProduct";
 import Image from "next/image";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { data } from "@/constant/products";
 import Icons from "@/components/atoms/icons";
 
@@ -38,15 +38,18 @@ const ProductPage = () => {
     }
   };
 
-  /** useMemo : hooks buat nyimpen hasil komputasi(perhitungan) yang kompleks ke dalam cache,
-   * tujuannya biar fungsi tsb ga perlu dijalanin/dihitung ulang ketika tidak ada perubahan pada state
+  /** useCallback : hooks buat nyimpen fungsi ke dalam cache,
+   * tujuannya biar fungsi tsb ga perlu dijalanin/dihitung ulang ketika tidak ada perubahan pada nilainya
    */
-  const cartTotal = useMemo(() => {
+  const calculateTotal = useCallback(() => {
     return cart.reduce((total, item) => {
       const product = data.find((product) => product.id === item.id);
       return total + product.price * item.qty;
     }, 0);
   }, [cart]); // dependency array
+
+  // panggil fungsi useCallback buat daperin nilai total
+  const cartTotal = calculateTotal();
 
   useEffect(() => {
     if (cart.length > 0) {
