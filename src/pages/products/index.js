@@ -1,14 +1,18 @@
 import Button from "@/components/atoms/Button";
 import CardProduct from "@/components/molecules/CardProduct";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { data } from "@/constant/products";
+import Icons from "@/components/atoms/icons";
 
 const ProductPage = () => {
   // useState sebutan variabel di react
   const [username, setUsername] = useState("");
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
+  const footerRef = useRef();
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  /** useRef : hooks untuk membuat referensi ke elemen DOM/fungsi untuk mengakses elemen DOM */
 
   // useEffect buat nanganin side effect/efek dari perubahan suatu data yang dijalankan tiap kali halaman di load
   useEffect(() => {
@@ -52,6 +56,39 @@ const ProductPage = () => {
     localStorage.removeItem("password");
     localStorage.removeItem("cart");
     window.location.href = "/login";
+  }
+
+  useEffect(() => {
+    function handleScroll() {
+      // ambil nilai offsetTop(posisi vertikal) dari elemen footer yang direferensikan oleh footerRef
+      const footerTop = footerRef.current.offsetTop; //ambil batas atas komponen
+
+      // ambil tinggi innerHeight dari objek window(tinggi viewport tanpa toolbar & scrollbar)
+      const viewportHeight = window.innerHeight;
+
+      // ambil nilai scrollY dari objek window(posisi scroll vertikal(sumbu Y) dilayar)
+      const scrollPosition = window.scrollY;
+
+      // logic untuk ngecek apakah posisi scroll dilayar telah mencapai elemen footer
+      if (scrollPosition + viewportHeight >= footerTop) {
+        setShowBackToTop(true);
+      } else {
+        setShowBackToTop(false);
+      }
+    }
+
+    // event listener buat jalanin fungsi handleScroll setiap event scroll terjadi
+    window.addEventListener("scroll", handleScroll);
+
+    // unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [footerRef]); // jalanin side effect ini tiap kali nilai footerRef berubah
+
+  function handleBackToTop() {
+    // balikin scroll keatas dengan animasi smooth
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
   return (
     <>
@@ -109,6 +146,16 @@ const ProductPage = () => {
           </div>
         )}
       </div>
+
+      {/* footer */}
+      {showBackToTop && (
+        <div onClick={handleBackToTop} className="fixed bottom-20 right-5 bg-gradient-hover p-2 rounded-full">
+          <Icons.DoubleArrowUp />
+        </div>
+      )}
+      <footer ref={footerRef} className="text-center p-5 bg-black text-white w-full">
+        All right reserved &copy; || by Danu
+      </footer>
     </>
   );
 };
