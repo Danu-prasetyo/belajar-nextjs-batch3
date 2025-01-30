@@ -179,12 +179,9 @@ export default function ProductPage({ data }) {
   );
 }
 
-/** SSG(Static site generation) : teknik yang merender halaman pada saat proses build time(npm run build)
- * dan halaman websitenya bisa di cache, jadi ketika user balik lagi ke halaman tsb proses rendernya lebih cepet
- * teknik ini khusus web yang datanya statis/hardcode/datanya tidak berubah
- *
- * build time: proses penyiapan aplikasi disisi server saat di deploy
- * run time: proses setelah build dimana aplikasi dijalanin di sisi server/browser
+/** ISR(Incremental static regeneration) : teknik menggabungkan SSR dan SSG,
+ * dimana halaman akan ditampilkan secara statis namun datanya bisa diupdate secara dinamis
+ * jika ada perubahan data
  */
 export async function getStaticProps() {
   try {
@@ -199,6 +196,7 @@ export async function getStaticProps() {
       props: {
         data: slicedProducts || [],
       },
+      revalidate: 60, // <- funsgi untuk merefresh/mengupdate data setelah 60detik
     };
   } catch (error) {
     console.log(error);
