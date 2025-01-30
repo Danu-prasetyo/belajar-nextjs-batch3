@@ -11,7 +11,7 @@ const CardProduct = ({ children }) => {
   return (
     <>
       <div className="rounded-lg bg-gradient-aigen shadow-xl p-1">
-        <div className="w-full max-w-xs bg-white rounded-lg">{children}</div>
+        <div className="w-full h-full max-w-xs bg-white rounded-lg">{children}</div>
       </div>
     </>
   );
@@ -20,7 +20,13 @@ const CardProduct = ({ children }) => {
 function Header({ image }) {
   return (
     <Link href="#">
-      <Image src={image} alt="card image" className="p-4 rounded-t-lg w-full" width={300} height={300} />
+      <Image
+        src={image}
+        alt="card image"
+        className="p-4 rounded-t-lg w-full aspect-video object-contain"
+        width={300}
+        height={300}
+      />
     </Link>
   );
 }
@@ -29,8 +35,8 @@ function Body({ title, desc }) {
   return (
     <div className="px-5 pb-5">
       <Link href="#">
-        <h3 className="text-3xl font-bold text-slate-900">{title}</h3>
-        <p className="mt-3 text-slate-700 text-base text-justify">{desc}</p>
+        <h3 className="text-3xl font-bold text-slate-900 line-clamp-2">{title}</h3>
+        <p className="mt-3 text-slate-700 text-base text-justify line-clamp-4">{desc}</p>
       </Link>
     </div>
   );
@@ -38,7 +44,7 @@ function Body({ title, desc }) {
 
 function Footer({ price, handleAddToCart, id }) {
   return (
-    <div className="flex flex-col items-center justify-center px-5 pb-5">
+    <div className="flex flex-col items-center justify-center px-5 pb-5 mt-auto w-full">
       <span className="text-2xl font-semibold mb-2">{price}</span>
       <Button buttonClassname="bg-gradient-hover w-full" onClick={() => handleAddToCart(id)}>
         Beli

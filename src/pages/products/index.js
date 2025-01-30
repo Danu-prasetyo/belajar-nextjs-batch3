@@ -1,9 +1,9 @@
 import Button from "@/components/atoms/Button";
 import CardProduct from "@/components/molecules/CardProduct";
 import Image from "next/image";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { data } from "@/constant/products";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Icons from "@/components/atoms/icons";
+import { getProducts } from "@/services/products";
 
 const ProductPage = () => {
   // useState sebutan variabel di react
@@ -13,6 +13,20 @@ const ProductPage = () => {
   const footerRef = useRef();
   const [showBackToTop, setShowBackToTop] = useState(false);
   /** useRef : hooks untuk membuat referensi ke elemen DOM/fungsi untuk mengakses elemen DOM */
+  const [data, setData] = useState([]);
+
+  // useEffect buat ngambil dari API
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await getProducts();
+        setData(data.slice(0, 8));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   // useEffect buat nanganin side effect/efek dari perubahan suatu data yang dijalankan tiap kali halaman di load
   useEffect(() => {
@@ -44,9 +58,10 @@ const ProductPage = () => {
   const calculateTotal = useCallback(() => {
     return cart.reduce((total, item) => {
       const product = data.find((product) => product.id === item.id);
-      return total + product.price * item.qty;
+
+      return total + product?.price * item.qty;
     }, 0);
-  }, [cart]); // dependency array
+  }, [cart, data]); // dependency array
 
   // panggil fungsi useCallback buat daperin nilai total
   const cartTotal = calculateTotal();
@@ -129,18 +144,24 @@ const ProductPage = () => {
 
         {/* cart */}
         {cart.length > 0 && (
-          <div className="w-2/6">
+          <div className="w-2/3">
             <h1 className="text-3xl font-bold text-blue-500 mb-4 uppercase">Cart</h1>
             <div className="flex flex-col gap-2">
               {cart.map((item) => {
                 const datas = data.find((data) => data.id === item.id);
                 return (
                   <div className="flex p-4 border rounded-lg" key={item.id}>
-                    <Image className="rounded" width={100} height={100} src={datas.image} alt="cart image" />
+                    <Image
+                      className="rounded aspect-square object-contain"
+                      width={100}
+                      height={100}
+                      src={datas?.image}
+                      alt="cart image"
+                    />
                     <div className="flex justify-between w-full">
                       <div className="flex flex-col justify-between ml-3">
-                        <span className="font-bold text-xl">{datas.title}</span>
-                        <span className="font-semibold">{datas.price}</span>
+                        <span className="font-bold text-xl line-clamp-2">{datas?.title}</span>
+                        <span className="font-semibold">{datas?.price}</span>
                       </div>
                       <div className="flex flex-col justify-center items-center">
                         <span className="mb-1">Qty</span>
