@@ -4,12 +4,12 @@ import Image from "next/image";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Icons from "@/components/atoms/icons";
 import { getProducts } from "@/services/products";
-import { getCurrentUser } from "@/services/auth";
 import { useRouter } from "next/router";
+import { useLogin } from "@/hooks/useLogin";
+import { formatCurrency } from "@/helpers/util/formatCurrency";
 
 const ProductPage = () => {
   // useState sebutan variabel di react
-  const [username, setUsername] = useState("");
   const [cart, setCart] = useState([]);
   // const [total, setTotal] = useState(0); // useMemo ga butuh state
   const footerRef = useRef();
@@ -17,6 +17,7 @@ const ProductPage = () => {
   /** useRef : hooks untuk membuat referensi ke elemen DOM/fungsi untuk mengakses elemen DOM */
   const [data, setData] = useState([]);
   const router = useRouter();
+  const username = useLogin();
 
   // useEffect buat ngambil dari API
   useEffect(() => {
@@ -33,14 +34,6 @@ const ProductPage = () => {
 
   // useEffect buat nanganin side effect/efek dari perubahan suatu data yang dijalankan tiap kali halaman di load
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      setUsername(getCurrentUser(token));
-    } else {
-      router.push("/login");
-    }
-
     // ambil data dari localStorage lalu parsing, tambahin logic || [] biar ga error ketika data dari localStorage kosong
     setCart(JSON.parse(localStorage.getItem("cart")) || []);
   }, []); /** [] dependensi array : kalo kosong buat mastiin kalo useEffect dijalanin cuma sekali setiap kali halaman diload
@@ -165,7 +158,7 @@ const ProductPage = () => {
                     <div className="flex justify-between w-full">
                       <div className="flex flex-col justify-between ml-3">
                         <span className="font-bold text-xl line-clamp-2">{datas?.title}</span>
-                        <span className="font-semibold">{datas?.price}</span>
+                        <span className="font-semibold">{formatCurrency(datas?.price)}</span>
                       </div>
                       <div className="flex flex-col justify-center items-center">
                         <span className="mb-1">Qty</span>
@@ -180,7 +173,7 @@ const ProductPage = () => {
             </div>
             <div className="flex justify-between px-4 py-2 border mt-2 font-semibold rounded-lg">
               <span>Total</span>
-              <span>{cartTotal}</span>
+              <span>{formatCurrency(cartTotal, "en-US", "USD")}</span>
             </div>
           </div>
         )}
