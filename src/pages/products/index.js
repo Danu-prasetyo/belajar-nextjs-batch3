@@ -7,6 +7,9 @@ import { getProducts } from "@/services/products";
 import { useRouter } from "next/router";
 import { useLogin } from "@/hooks/useLogin";
 import { formatCurrency } from "@/helpers/util/formatCurrency";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentUser } from "@/services/auth";
+import { setUsername } from "@/redux/screenSlice/screenSlice";
 
 export default function ProductPage({ data }) {
   // useState sebutan variabel di react
@@ -17,10 +20,21 @@ export default function ProductPage({ data }) {
   /** useRef : hooks untuk membuat referensi ke elemen DOM/fungsi untuk mengakses elemen DOM */
   // const [data, setData] = useState([]); //SSR udah ga perlu in
   const router = useRouter();
-  const username = useLogin();
+  // const username = useLogin();
+  const dispacth = useDispatch(); // ngirim perubahan ke state global //ngakses state gloabl di store
+  const { isLargeScreen, username } = useSelector((state) => state.screen);
 
   // useEffect buat nanganin side effect/efek dari perubahan suatu data yang dijalankan tiap kali halaman di load
   useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    // validasi token, cek klo ga ada token balikin ke login
+    if (token) {
+      dispacth(setUsername(getCurrentUser(token)));
+    } else {
+      router.push("/login");
+    }
+
     // ambil data dari localStorage lalu parsing, tambahin logic || [] biar ga error ketika data dari localStorage kosong
     setCart(JSON.parse(localStorage.getItem("cart")) || []);
   }, []); /** [] dependensi array : kalo kosong buat mastiin kalo useEffect dijalanin cuma sekali setiap kali halaman diload
@@ -101,12 +115,21 @@ export default function ProductPage({ data }) {
 
   function handleBackToTop() {
     // balikin scroll keatas dengan animasi smooth
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    {
+      isLargeScreen
+        ? window.scrollTo({ top: 0, behavior: "smooth" })
+        : window.scrollTo({ top: 700, behavior: "smooth" });
+    }
   }
   return (
     <>
       <div className="flex justify-between items-center bg-black text-white font-bold px-5 py-4">
         <h1 className="text-xl">Hi, {username}</h1>
+        {isLargeScreen ? (
+          <p className="text-white text-xl font-bold">Dekstop</p>
+        ) : (
+          <p className="text-white text-xl font-bold">Mobile</p>
+        )}
         <Button buttonClassname={"bg-red-500 hover:bg-red-700"} onClick={handleLogout}>
           Logout
         </Button>
