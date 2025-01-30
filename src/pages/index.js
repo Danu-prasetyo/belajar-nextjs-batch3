@@ -1,4 +1,6 @@
+import { isMobileScreenAtom } from "@/atoms/atoms";
 import { useLogin } from "@/hooks/useLogin";
+import { useAtom } from "jotai";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -6,7 +8,9 @@ export default function Home() {
   //  anggap state ini nyimpen data yang di kirim dari API
   const [data, setData] = useState(true);
   const username = useLogin();
-  const { isMobileScreen } = useSelector((state) => state.screen);
+  // const { isMobileScreen } = useSelector((state) => state.screen);
+  // useAtom buat make state global
+  const [isMobileScreen] = useAtom(isMobileScreenAtom);
   console.log("mobile : ", isMobileScreen);
 
   // fungsi untuk memperbarui nilai state
