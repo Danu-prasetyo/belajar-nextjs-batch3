@@ -141,8 +141,8 @@ export default function ProductPage({ data }) {
           <div className="flex flex-wrap gap-4">
             {data?.map((item) => (
               <CardProduct key={item.id}>
-                <CardProduct.Header image={item.image} />
-                <CardProduct.Body title={item.title} desc={item.description} />
+                <CardProduct.Header image={item.image} link={`/products/${item.id}`} />
+                <CardProduct.Body title={item.title} desc={item.description} link={`/products/${item.id}`} />
                 <CardProduct.Footer price={item.price} handleAddToCart={handleAddToCart} id={item.id} />
               </CardProduct>
             ))}
