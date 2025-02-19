@@ -1,7 +1,7 @@
 import Button from "@/components/atoms/Button";
 import InputForm from "@/components/molecules/InputForm";
 import { login } from "@/services/auth";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import React, { useState } from "react";
 
 const Login = () => {

@@ -1,0 +1,208 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginPage render halaman login sesuai spesifikasi 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="flex justify-center items-center min-h-screen"
+      >
+        <div
+          class="rounded-lg bg-gradient-aigen p-1 shadow-xl"
+        >
+          <div
+            class="w-full max-w-xs border rounded-lg p-8 bg-white"
+          >
+            <h1
+              class="text-3xl font-bold mb-2 text-blue-500"
+            >
+              Login
+            </h1>
+            <p
+              class="font-medium text-slate-500 mb-4"
+            >
+              Hi, please login to your account
+            </p>
+            <form>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  for="username"
+                >
+                  Username
+                </label>
+                <input
+                  class="text-sm border rounded w-full py-2 px-3 text-slate-700 placeholder:text-slate-400"
+                  id="username"
+                  name="username"
+                  placeholder="Masukkan username"
+                  type="text"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  for="password"
+                >
+                  Password
+                </label>
+                <input
+                  class="text-sm border rounded w-full py-2 px-3 text-slate-700 placeholder:text-slate-400"
+                  id="password"
+                  name="password"
+                  placeholder="Masukkan password"
+                  type="password"
+                />
+              </div>
+              <button
+                class="h-10 px-6 rounded font-semibold bg-gradient-hover text-white w-full mt-4"
+                type="submit"
+              >
+                Login
+              </button>
+            </form>
+            <p
+              class="text-sm text-center mt-2"
+            >
+              Dont have an account?
+               
+              <a
+                class="text-blue-500 hover:text-blue-700"
+                href="/register"
+              >
+                Register
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="flex justify-center items-center min-h-screen"
+    >
+      <div
+        class="rounded-lg bg-gradient-aigen p-1 shadow-xl"
+      >
+        <div
+          class="w-full max-w-xs border rounded-lg p-8 bg-white"
+        >
+          <h1
+            class="text-3xl font-bold mb-2 text-blue-500"
+          >
+            Login
+          </h1>
+          <p
+            class="font-medium text-slate-500 mb-4"
+          >
+            Hi, please login to your account
+          </p>
+          <form>
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 mb-1"
+                for="username"
+              >
+                Username
+              </label>
+              <input
+                class="text-sm border rounded w-full py-2 px-3 text-slate-700 placeholder:text-slate-400"
+                id="username"
+                name="username"
+                placeholder="Masukkan username"
+                type="text"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 mb-1"
+                for="password"
+              >
+                Password
+              </label>
+              <input
+                class="text-sm border rounded w-full py-2 px-3 text-slate-700 placeholder:text-slate-400"
+                id="password"
+                name="password"
+                placeholder="Masukkan password"
+                type="password"
+              />
+            </div>
+            <button
+              class="h-10 px-6 rounded font-semibold bg-gradient-hover text-white w-full mt-4"
+              type="submit"
+            >
+              Login
+            </button>
+          </form>
+          <p
+            class="text-sm text-center mt-2"
+          >
+            Dont have an account?
+             
+            <a
+              class="text-blue-500 hover:text-blue-700"
+              href="/register"
+            >
+              Register
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
